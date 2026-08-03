@@ -210,9 +210,15 @@ Iterative policy evaluation was implemented successfully using the Gymnasium Fro
 
 ```text
 
-
+Inference
 
 ```
+
+The Policy Iteration algorithm successfully converged to the optimal state-value function for the FrozenLake environment.
+In the first execution, the algorithm converged in 28 iterations, while in the second execution it converged in 57 iterations. The difference in iterations is due to the random initialization of the policy, causing different convergence speeds.
+The highest state value is observed near the goal state (approximately 0.358 in the first run and 0.423 in the second run), indicating that states closer to the goal have a higher expected cumulative reward.
+States corresponding to holes and terminal states have a value of 0, as no future reward can be obtained from them.
+The 4×4 state-value grid clearly shows that the values increase as the agent moves closer to the goal, demonstrating that the learned policy maximizes the expected long-term reward.
 
 
 
