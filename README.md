@@ -192,11 +192,12 @@ env.close()
 ---
 
 ## Output
- ### Gamma=0.97
+### Gamma=0.97
 <img width="689" height="294" alt="image" src="https://github.com/user-attachments/assets/1c8a37f4-63a8-481c-b070-3fd26f7861a0" />
-### Gamma=0.8
-<img width="669" height="302" alt="image" src="https://github.com/user-attachments/assets/b7bf4d48-50a1-4101-8718-dc0504c83cca" />
 
+### Gamma=0.8
+
+<img width="669" height="302" alt="image" src="https://github.com/user-attachments/assets/b7bf4d48-50a1-4101-8718-dc0504c83cca" />
 ---
 
 ## Result
