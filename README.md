@@ -99,34 +99,104 @@ Where:
 ## Program
 
 ```python
+import gymnasium as gym
+import numpy as np
+
+# Create FrozenLake environment
+env = gym.make("FrozenLake-v1", map_name="4x4", is_slippery=True).unwrapped
+
+# Parameters
+gamma = 0.97
+theta = 1e-9
+
+# Random policy: each action has equal probability
+policy = np.ones((n_states, n_actions)) / n_actions
+
 
 
 # -------------------------------------------------
 # Policy Evaluation Function
 # -------------------------------------------------
 
+# Initialize value function
+V = np.zeros(n_states)
+
+def policy_evaluation(env, policy, gamma,theta):
+    """
+    Performs iterative policy evaluation using the Bellman expectation equation.
+
+    Parameters:
+        env    : Gymnasium FrozenLake environment
+        policy : Fixed policy to be evaluated
+        gamma  : Discount factor
+        theta  : Convergence threshold
+
+    Returns:
+        V         : Estimated state-value function
+        iteration : Number of iterations used for convergence
+    """
+
+    n_states=env.observation_space.n
+
+    V=np.zeros(n_states)
+
+    iteration=0
+
+    while True:
+        delta=0
+        for s in range(n_states):
+            v=V[s]
+            new_value=0
+            for a,action_prob in enumerate(policy[s]):
+
+
+                for prob,next_state,reward,done in env.P[s][a]:
+                    new_value+=action_prob*prob*(
+                        reward+gamma*V[next_state]
+                    )
+            V[s]=new_value
+
+
+            delta=max(delta,abs(v-V[s]))
+            iteration+=1
+
+
+        if delta<theta:
+            break
+
+    return V,iteration
+
 
 # -------------------------------------------------
 # Display Output
 # -------------------------------------------------
 
-# Change the parameters and observe the results
+V, iterations = policy_evaluation(env, policy, gamma, theta)
+
+print("Name:Payyavula Jeshwanth Kumar")
+print("Register Number: 212223240114")
+print("Number of iterations:", iterations)
+print("\nState-Value Function:")
+print(V)
+
+print("Name: Payyavula Jeshwanth Kumar")
+print("Register Number: 212223240114")
+print("\nState-Value Function as 4x4 Grid:")
+print(np.round(V.reshape(4, 4), 4))
+
+env.close()
+
 
 ```
 
 ---
 
 ## Output
+ ### Gamma=0.97
+<img width="689" height="294" alt="image" src="https://github.com/user-attachments/assets/1c8a37f4-63a8-481c-b070-3fd26f7861a0" />
+### Gamma=0.8
+<img width="669" height="302" alt="image" src="https://github.com/user-attachments/assets/b7bf4d48-50a1-4101-8718-dc0504c83cca" />
 
-```text
-
-Number of Iterations: 
-
-State-Value Function as 4x4 Grid:
-
-
-
-```
 ---
 
 ## Result
